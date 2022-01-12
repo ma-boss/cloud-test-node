@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>云托管集成测试 kit</title>
+</head>
+
+<body>
+  <a href="/test/devinfo" target="_blank">getwxadevinfo</a>
+  <a href="/test/getcode" target="_blank">getcode</a>
+  <a href="/test/readcode" target="_blank">readcode</a>
+  <a href="/test/svrkit" target="_blank">svrkit</a>
+  <a href="/test/polaris" target="_blank">polaris</a>
+  <a href="/test/pay" target="_blank">pay</a>
+  <div>
+    <a id="cos" href="#">cos</a>
+    <input type="text" id="bucket" value="7765-web-v2-1g8g0y2x3197301a-1304825656">
+    <input type="text" id="region" value="ap-shanghai">
+    <pre id="result"></pre>
+  </div>
+</body>
+
+</html>
+
+
+<script>
+  const $ = document.getElementById.bind(document);
+  $('cos').addEventListener('click', (ev) => {
+    ev.preventDefault();
+    fetch('/cos/get', {
+      body: JSON.stringify({
+        bucket: $('bucket').value,
+        region: $('region').value,
+      }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.text()).then(res => {
+      $('result').innerText = res;
+    })
+  })
+
+</script>
